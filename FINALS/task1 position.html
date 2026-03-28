@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Positions Task</title>
+
+<style>
+body{
+    height:3000px;
+    font-family:sans-serif;
+    background-color: rgb(238, 238, 238) ;
+}
+
+.box{ 
+    position:fixed;
+    width: 400px;
+    height: 250px;
+    bottom:20px;
+    right:20px;
+    background:rgb(178, 178, 178);
+    z-index: 1;
+}
+
+.closebutton{
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:40px;
+    height:40px;
+    background:black;
+    color:white;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.product{
+    position:relative; 
+    display:inline-block;
+    margin:80px;
+    padding: 20px;
+    margin-left: 200px;
+}
+
+.product img{
+    width:100%;
+    height:560px;
+    background-color: white;
+    padding: 10px;
+    padding-right: 40px;
+    border:1px solid rgb(226, 171, 207);
+}
+
+.discount{
+    position:absolute;
+    top:30px;
+    right:-1px;
+    background:black;
+    color:white;
+    padding:10px 25px;
+    font-size:15px;
+}
+
+.overlay{
+    position:absolute;
+    bottom: 4%;
+    right:-15px;
+    width:100%;
+    height:33%;
+    background:rgba(255,255,255,0.7); 
+}
+
+.cart{
+    position:absolute;
+    bottom:14%;
+    left:43%;
+    background:white;
+    padding:8px 15px;
+    border:1px solid black;
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+    
+    <div class="closebutton">X</div>
+    <div class="box"></div>
+    <div class="product">
+        
+        <img src="shirt.jpg">
+        <div class="discount">20% OFF</div>
+        <div class="overlay">
+            <div class="cart">Add to Cart</div>
+        </div>
+    </div>
+<a style="color: rgb(253, 104, 206);" href="/FINALS/codeposition.png" ><h2>CODE</h2></a>
+</body>
+</html>

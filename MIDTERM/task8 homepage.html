@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Homepage</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin:0;
+    background: rgb(226, 226, 226);
+    font-size: 19px;
+}
+
+header{
+    width:100%;
+    display:block;
+    background: rgb(249, 108, 179);
+    text-align: center;
+    color:#f8eaf2;
+    padding:25px;
+    border: 3px solid rgb(227, 202, 240);
+    border-radius:15px;
+    font-size:25px;
+    font-weight:bold;
+    letter-spacing: 2px;
+    box-shadow: 0 5px 10px rgba(240, 62, 169, 0.15);
+}
+
+header p{
+    margin:5px 0 0 0;
+    font-size: 15px;
+} 
+
+main{
+    display:flex;
+    margin:15px;
+    flex-wrap: wrap;
+}
+
+ul{
+    list-style-type:none;
+    width: 100%;
+    padding:0;
+    margin:10px;
+    width:220px;
+}
+
+li a{
+    display:block;
+    padding:10px;
+    margin:10px 0;
+    background: beige;
+    text-decoration:none;
+    color:#ea4bad;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px #f08ca1;
+    transition: 0.1s;
+}
+
+li:nth-child(odd) a:hover{
+    background: #fc7fb8;
+    color:white;
+}
+
+li:nth-child(even) a:hover{
+    background: rgb(229, 120, 251);
+    color:white;
+}
+
+.link p{
+    margin:3px;
+    color: #78355c;
+}
+
+.link a{
+    margin:3px;
+    text-decoration: underline;
+    color: #f97dc5;
+    font-weight: bold;
+    padding:6px 1px;
+    transition:0.1s;
+    display: inline-block;
+}
+
+.link a:hover{
+    color:rgb(212, 41, 212);
+}
+
+section{
+    flex:2;
+    border-radius: 20px;
+    box-shadow: 0 6px 11px #e8708a;
+    background:white;
+    padding: 10px;
+    margin:0 10px;
+}
+
+aside{
+    flex:1;
+    padding: 20px;
+    margin:0px;
+    background-color:rgb(255, 137, 202);
+    color: #ffe0f2;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 6px 11px #b1a0a5;
+}
+
+footer{
+    background-color:rgb(249, 108, 179);
+    color: #ffe0f2 ;
+    margin:20px;
+    padding:20px;
+    text-align:center;
+    box-shadow: 0 6px 11px #b19aa7;
+    border-radius: 20px;
+}  
+
+@media screen and (max-width:600px)
+{
+main{
+    flex-direction:column;
+}
+
+nav ul{
+    width: 100%;
+}
+
+aside, section{
+    width:100%;
+    margin: 10px 0;
+}
+}
+
+</style>
+
+</head>
+<body>
+    
+    <header>
+        Welcome to My Homepage
+        <p>Use the menu to select different Stylesheets</p>
+    </header>
+    
+    <main>
+        <nav>
+            <ul>
+                <li><a href="#">Stylesheet 1</a></li>
+                <li><a href="#">Stylesheet 2</a></li>
+                <li><a href="#">Stylesheet 3</a></li>
+                <li><a href="#">Stylesheet 4</a></li>
+                <li><a href="#">No Stylesheet</a></li>
+            </ul>
+        </nav>
+        
+        <section>
+            <h1 style="color: #78355c;">Same Page Different Stylesheets</h1>
+            
+            <div class="link">
+                <p>This is a demonstration of how different stylesheets can change the layout of your HTML page.
+                    You can change the layout of this page by selecting different stylesheets in the menu, or by selecting one of the following links:
+                    <br>
+                    
+                    <a href="#">Stylesheet1,</a> 
+                    <a href="#">Stylesheet2,</a> 
+                    <a href="#">Stylesheet3,</a> 
+                    <a href="#">Stylesheet4,</a> 
+                </p>
+                
+                <h2 style="color: #78355c;">No Styles</h2>
+                <p>
+                    This page uses DIV elements to group different sections of the HTML page.
+                    Click here to see how the page looks like with no stylesheet.
+                    <br>
+                    <a href="#">No Stylesheet</a> 
+                </p>
+            </div>
+        </section>
+        
+        <aside>
+            <h3 style="color: #ffe0f2;" >Side-Bar</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                ut laoreet dolore magna aliquam erat volutpat.
+            </p>
+        </aside>
+    </main>
+    
+    <footer>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores aliquam ratione qui quasi consectetur incidunt consequatur dolor. Voluptas ullam voluptate minima, quam pariatur iusto atque accusantium, illum quos consequatur earum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore dolorem tenetur veritatis quia non iusto illum reiciendis animi qui deserunt perferendis rem voluptatem numquam soluta quasi culpa, nobis adipisci laboriosam.
+    </footer>
+
+<a style="color: rgb(253, 104, 206);" href="/MIDTERM/codehomepage.png"><h2>CODE</h2></a>
+</body>
+</html>

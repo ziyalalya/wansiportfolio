@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semantic</title>
+  
+ <style>
+
+  *{
+    box-sizing: border-box;
+  }
+
+  body{
+    margin-top: 0px;
+  }
+
+  #header{
+    background-color : rgb(250, 156, 172);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(237, 228, 228);
+  }
+  
+  #navbar ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(250, 156, 172);
+  }
+  
+  #navbar li{
+    float: left;
+  }
+  
+  #navbar a {
+    display: block;
+    color: rgb(247, 238, 238);
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+  }
+  
+  #navbar li a:hover{
+    background-color: beige;
+    color: rgb(237, 118, 167);
+  }
+
+  #navbar2 ul{ 
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #navbar2 li a{
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: rgb(247, 238, 238);
+    background-color: rgb(192, 189, 189);
+    text-align: center;
+    margin: 3px;
+    border-radius: 5px;
+  }
+
+  #navbar2 li a:hover{
+    background-color: beige;
+    color: rgb(237, 118, 167);
+  }
+
+  aside, section, article{
+    background-color: rgb(249, 246, 248);
+    width:33%;
+    float:left;
+    padding: 25px;
+    color: rgb(84, 84, 84);
+    margin: 0px;
+  }
+
+  #footer{
+    background-color: rgb(192, 189, 189);
+    color: rgb(247, 243, 243);
+    height:100px;
+    clear: both;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media screen and (max-width: 800px)
+  {
+  aside, section, article
+  {
+    width:100%;
+  }
+}
+</style>
+</head>
+<body>
+  
+  <header id="header"> 
+    <h1>Header</h1>
+  </header>
+  
+  <h1 style="color: rgb(252, 158, 174);">Horizontal Nav Bar</h1>
+  <nav id="navbar">
+    <ul><li><a href="#home">Home</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+  
+  <nav id="navbar2">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <aside>
+      <h2 style="color: rgb(242, 93, 118);">Aside</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum quis earum sunt iste voluptas doloribus quos commodi rerum. Consequatur qui dignissimos repellat quia fugit dolorem incidunt, quas reiciendis consequuntur dolore?</p>
+    </aside>
+    
+    <section>
+      <h2 style="color: rgb(242, 93, 118);">Section</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae eligendi mollitia hic delectus? At quaerat non libero nostrum tempore. Aut vel ipsum ducimus at exercitationem itaque quibusdam earum accusantium corrupti.</p>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio rerum vel laudantium nam fugiat recusandae rem quisquam maiores dignissimos nostrum, nisi ut vitae adipisci, voluptatibus veniam quis at error perferendis!</p>
+    </section>
+  
+    <article>
+      <h2 style="color: rgb(242, 93, 118);">Article</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse maiores, at optio eum beatae voluptatibus cumque, accusantium animi expedita, accusamus doloribus. Inventore praesentium voluptatum ullam, pariatur nemo autem recusandae. Nostrum.</p>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi sapiente, voluptate, ut fugiat amet reprehenderit corrupti quia veritatis voluptas quaerat officia? Sequi ab, beatae quod quidem hic dolor quaerat velit!</p>
+    </article>
+    
+    <footer id="footer">
+      <h1>This is footer</h1>
+    </footer>
+  </main>
+  
+  <a style="color: rgb(253, 104, 206);" href="/MIDTERM/codesemantic.png"><h2>CODE</h2></a>
+</body>
+</html>
