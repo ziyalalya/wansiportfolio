@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Layout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { 
+            background-color: #ffffff; 
+            padding: 40px; 
+            font-family: Arial, sans-serif;
+        }
+
+        /*layout 1*/
+        .layout-container {
+            background-color: #eeeeee;
+            padding: 15px;
+            margin-bottom: 40px;
+            border: 1px solid #ddd;
+        }
+
+        .box-green {
+            background-color: #2d8a57;
+            color: white;
+            padding: 15px;
+            border: 1px solid #ffffff;
+            font-size: 14px;
+        }
+
+        .box-purple {
+            background-color: #8a00d4;
+            color: white;
+            padding: 15px;
+            border: 2px solid #ffc107; 
+            font-size: 14px;
+        }
+
+        /*layout 2*/
+        .box-salmon {
+            background-color: #ff8570;
+            color: white;
+            padding: 15px;
+            border: 1px solid #ffffff;
+        }
+
+        .box-teal {
+            background-color: #5f9ea0; 
+            color: white;
+            padding: 15px;
+            border: 1px solid #ffffff;
+        }
+
+        /*layout 3*/
+        .box-blue {
+            background-color: #4169e1;
+            color: white;
+            padding: 15px;
+            border: 1px solid #ffffff;
+        }
+
+        .box-dark-slate {
+            background-color: #2f4f4f; 
+            color: white;
+            padding: 15px;
+            border: 1px solid #ffffff;
+        }
+
+        /*layout 4*/
+        .card-custom {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            height: 100%;
+            border: none;
+        }
+
+        .card-number {
+            font-size: 40px;
+            font-weight: bold;
+            color: #4b0082;
+            margin-bottom: 10px;
+        }
+
+        .layout-4-title {
+            color: #4b0082;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .btn-read-more {
+            background-color: #00ced1;
+            color: black;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+    </style>
+</head>
+<body>
+    <h5>Layout 1.</h5>
+
+        <div class="layout-container">
+            <div class="row g-2">
+                <div class="col-12">
+                    <div class="box-green">50% desktop, 100% mobile</div>
+                </div>
+                <div class="col-12">
+                    <div class="box-green">50% desktop, 100% mobile</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout-container">
+            <div class="row g-0"> <div class="col-12">
+                    <div class="box-purple">50% desktop, 100% mobile</div>
+                </div>
+                <div class="col-12">
+                    <div class="box-purple">50% desktop, 100% mobile</div>
+                </div>
+            </div>
+        </div>
+
+        <h5>Layout 2.</h5>
+        <div class="layout-container">
+        <div class="row g-2">
+            <div class="col-md-6 col-12">
+                <div class="box-salmon">Column 1</div>
+            </div>
+            <div class="col-md-3 col-12">
+                <div class="box-salmon">Column 2</div>
+            </div>
+            <div class="col-md-3 col-12">
+                <div class="box-salmon">Column 3</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layout-container">
+        <div class="row g-2">
+            <div class="col-12">
+                <div class="box-teal">Column 1</div>
+            </div>
+            <div class="col-12">
+                <div class="box-teal">Column 2</div>
+            </div>
+            <div class="col-12">
+                <div class="box-teal">Column 3</div>
+            </div>
+        </div>
+    </div>
+
+     <h5>Layout 3.</h5>
+     <div class="layout-container">
+        <div class="row g-2">
+            <div class="col-md-4 col-12">
+                <div class="box-blue">Column 1</div>
+            </div>
+            <div class="col-md-8 col-12">
+                <div class="box-blue">Column 2</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layout-container">
+        <div class="row g-2">
+            <div class="col-12">
+                <div class="box-dark-slate">Column 1</div>
+            </div>
+            <div class="col-12">
+                <div class="box-dark-slate">Column 2</div>
+            </div>
+        </div>
+    </div>
+
+    <h5>Layout 4.</h5>
+    <div class="container-fluid bg-light p-5">
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card-custom">
+                    <div class="card-number">01</div>
+                    <p class="text-muted">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores fugiat rerum totam provident voluptatem quasi quo voluptate voluptatum, deleniti, hic numquam esse et maxime? Qui impedit doloremque modi repudiandae quae!</p>
+                    <button class="btn-read-more">Read more...</button>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card-custom">
+                    <div class="card-number">02</div>
+                    <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed dicta eligendi eum officiis hic sunt expedita ipsa quos. Quia commodi impedit deserunt quidem quisquam? Quo minima ad neque ex voluptatibus!</p>
+                    <button class="btn-read-more">Read more...</button>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card-custom">
+                    <div class="card-number">03</div>
+                    <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, voluptate natus eum quibusdam voluptatum accusantium dolor modi odit sequi libero, ipsa assumenda. Fugiat fugit blanditiis dolor quod earum? Laudantium, voluptates!</p>
+                    <button class="btn-read-more">Read more...</button>
+                </div>
+            </div>
+        </div>
+
+</body>
+</html>
