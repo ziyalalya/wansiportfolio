@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Flex Box</title>
+    <style>
+
+        .flex-container1{
+            background-color: black;
+            padding: 10px;
+            height: 170px;
+        }
+
+        .container1{
+            flex-direction: row;
+            display: flex;
+        }
+
+        .flex-item1{ width: 50px; background-color: aquamarine;}
+        .flex-item2{flex: 2; background-color: lightpink;}
+        .flex-item3{flex: 1; background-color: aquamarine;}
+
+        .container2{
+            background-color: antiquewhite;
+            flex-direction: row;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .item{
+            background-color: lightpink;
+        }
+
+        .container3{
+            background-color: antiquewhite;
+            border: 2px solid gray;
+            height: 50px;
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .layout {
+        display: flex;
+        flex-direction: column;
+        min-height: 80vh;
+        border-top: 2px solid red;
+    }
+
+    header, footer {
+        background-color: beige;
+        padding: 10px;
+        height: 130px;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        padding: 10px;
+        background-color: greenyellow;
+        justify-content: space-between;
+    }
+
+    .left{
+        width: 35%;
+        background-color: green;
+        padding: 10px;
+        margin-right: 5px;
+        border: 2px solid red;
+    }
+
+    .right{
+        width: 60%;
+        margin-left: 5px;
+        background-color: green;
+        padding: 10px;
+        border: 2px solid red;
+    }
+
+    @media (max-width: 600px) {
+        .content {
+            flex-direction: column;
+        }
+        .right{
+            order: 1; 
+            width: 100%;
+            margin-left: 0;
+        }
+        .left{
+            order: 1; 
+            width: 100%;
+            margin-right: 0;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <div class="flex-container1">
+
+    <div class="container1">
+        <div class="flex1" style="width: 200px; background-color: aquamarine;">200px</div>
+        <div class="flex2" style="width: 75px; background-color: lightpink;">75px</div>
+    </div>
+    <br>
+
+    <div class="container1">
+        <div class="flex-item1">item1</div>
+        <div class="flex-item2">item2</div>
+        <div class="flex-item3">item3</div>
+    </div>
+    <br>
+
+        <div class="container2">
+            <div class="item">item1</div>
+            <div class="item">item2</div>
+            <div class="item">item3</div>
+            <div class="item">item4</div>
+        </div>
+        <br>
+
+        <div class="container3">
+            <div class="item">item1</div>
+            <div class="item">item2</div>
+        </div>
+</div>
+<br>
+
+<div class="layout">
+    <header>This is a Header</header>
+    <div class="content">
+        <div class="left">Section left-nav</div>
+        <div class="right">Section right-nav</div>
+    </div>
+    <footer>This is a footer</footer>
+</div>
+</body>
+</html>
