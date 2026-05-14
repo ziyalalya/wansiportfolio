@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BizMarket</title>
+</head>
+<style>
+body {
+    margin: 0;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-image: url('logo.jpg');
+    background-color: rgba(223, 222, 222, 0.7);
+    background-blend-mode: multiply;
+    background-size: cover;      
+    background-position: center;  
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+#app {
+    display: none;
+    max-width: 1100px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.6);
+    min-height: 100vh;
+    box-shadow:none;
+}
+
+header {
+    background: rgba(173, 216, 230, 0.7) !important;
+    backdrop-filter: blur(15px); 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    color: #333;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card, .product {
+    background: rgba(255, 255, 255, 0.75) !important;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+nav button {
+    margin: 4px;
+    background: #334155;
+    color: white;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.product {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.product img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.location-card {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.location-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.location-card h3 {
+    margin: 10px 0 5px;
+}
+
+#mapContainer {
+    margin-top: 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+button {
+    background: #334155;/* Slate Gray */
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+    background: #b6b9b6;
+}
+
+.product:hover {
+    transform: translateY(-5px); /* Tatalon ng konti pataas */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+#auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    width: 320px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+#auth .card {
+    width: 320px;
+    background: rgba(255, 255, 255, 0.75); 
+    backdrop-filter: blur(10px);      
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.page { display: none; padding: 20px; animation: fadeIn 0.5s;}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.active { display: block; }
+.msg { background: #ddd; margin: 5px 0; padding: 8px; border-radius: 6px; }
+.badge { background: #ef4444; color: #fff; padding: 2px 6px; border-radius: 10px; font-size: 12px; margin-left: 5px; }
+
+#chatBox {
+    height: 300px;
+    overflow-y: auto;
+    background: #f2f2f2;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+#about, #help {
+    line-height: 1.6; 
+    color: var(--text-color);
+}
+#about h2, #help h2 {
+    color: #4e4c59; 
+    font-size: 28px;
+    border-bottom: 2px solid #add8e6; 
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+#about h3, #help h3 {
+    color: #636178; 
+    margin-top: 25px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#about ul, #help ul {
+    list-style: none; 
+    padding-left: 0;
+}
+
+#about li, #help li {
+    background: rgba(255, 255, 255, 0.4);
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid #9c94f5; /* Kulay na guhit sa gilid */
+    transition: 0.3s;
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+
+#about li:hover, #help li:hover {
+    transform: translateX(10px); /* Gagalaw pakanan pag tinapatan ng mouse */
+    background: rgba(223, 221, 221, 0.5);
+}
+
+/* Gamitin ang class na 'sos' o 'card' na nasa loob ng help/about */
+#about .card, #help .sos {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(5px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: left; /* Siguraduhing pantay sa kaliwa */
+}
+</style>
+
+<body>
+
+<!-- AUTH -->
+<div id="auth">
+<div class="card">
+<h2 style="text-align: center;" id="modeTitle">Login</h2>
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+<select id="role">
+<option value="student">Student</option>
+<option value="vendor">Vendor</option>
+<option value="teacher">Teacher</option>
+</select>
+<button onclick="authSubmit()">Submit</button>
+<button onclick="toggleMode()">Switch</button>
+</div>
+</div>
+
+<div id="app">
+<header>
+<div id="userInfo"></div>
+<nav>
+<button onclick="go('market')">Market</button>
+<button id="vendorBtn" onclick="go('vendor')">Vendor</button>
+<button id="ordersBtn" onclick="go('orders')">Orders</button>
+<button id="myOrdersBtn" onclick="go('myOrders')">My Orders</button>
+<button onclick="go('mapPage')">Map</button>
+<button onclick="go('cart')">Cart</button>
+<button onclick="go('chat')">Chat</button>
+<button onclick="go('about')">About</button>
+<button onclick="go('help')">Help</button>
+<button onclick="showNotif()">🔔<span id="notifCount" class="badge"></span></button>
+</nav>
+<button onclick="logout()">Logout</button>
+</header>
+
+<!-- MARKET -->
+<div id="market" class="page active">
+<input id="search" placeholder="Search..." oninput="renderMarket()">
+<select id="category" onchange="renderMarket()">
+<option value="">All</option>
+<option>Food</option>
+<option>Drinks</option>
+<option>Snacks</option>
+<option>School Supplies</option>
+</select>
+<div id="marketList" class="grid"></div>
+</div>
+
+<!-- VENDOR -->
+<div id="vendor" class="page">
+<div class="card">
+<select id="plocation">
+<option value="CASTECH Building">CASTECH Building</option>
+<option value="UFC Building">UFC Building</option>
+</select>
+<input id="pname" placeholder="Product Name">
+<input id="pprice" placeholder="Price">
+<input id="pstock" placeholder="Stock">
+<select id="pcat">
+<option>Food</option>
+<option>Drinks</option>
+<option>School Supplies</option>
+</select>
+<input type="file" id="pimg">
+<button onclick="addProduct()">Add Product</button>
+</div>
+
+<h3>Pending</h3>
+<div id="pending" class="grid"></div>
+<h3>Approved</h3>
+<div id="approved" class="grid"></div>
+</div>
+
+<!-- VENDOR ORDERS -->
+<div id="orders" class="page">
+<h2>Vendor Orders</h2>
+<div id="orderList"></div>
+</div>
+
+<!-- STUDENT ORDERS -->
+<div id="myOrders" class="page">
+<h2>My Orders</h2>
+<div id="myOrderList"></div>
+</div>
+
+<!-- CART -->
+<div id="cart" class="page">
+<h2>Shopping Cart</h2>
+<div id="cartList"></div>
+<button onclick="checkout()">Checkout</button>
+</div>
+<div id="mapPage" class="page">
+<h2>Vendor Location</h2>
+<div id="locationChoices" class="grid">
+    <div class="location-card">
+        <img src="https://via.placeholder.com/400x150?text=CASTECH+Building" alt="CASTECH Building">
+        <h3>CASTECH Building</h3>
+        <p>View the CASTECH Building location on the map.</p>
+        <button onclick="showMap('CASTECH Building')">View CASTECH Map</button>
+    </div>
+    <div class="location-card">
+        <img src="https://via.placeholder.com/400x150?text=UFC+Building" alt="UFC Building">
+        <h3>UFC Building</h3>
+        <p>View the UFC Building location on the map.</p>
+        <button onclick="showMap('UFC Building')">View UFC Map</button>
+    </div>
+</div>
+<div id="mapContainer">
+    <p>Select a building above to see its location and map.</p>
+</div>
+</div>
+
+<!-- CHAT -->
+<div id="chat" class="page">
+<h2>Chat Box</h2>
+<div id="chatBox"></div>
+<input id="msg">
+<button onclick="sendMsg()">Send</button>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="page">
+<div class="card">
+<h2>About BizMarket</h2>
+<p>This platform is a campus-based marketplace that connects students, teachers, and vendors in one system.
+It allows easy buying and selling of products within the school environment.</p>
+<h3>🎯 Our Goal</h3>
+<p>To provide a simple, organized, and efficient way for campus users to buy and sell products without hassle.</p>
+<h3>✨ Features</h3>
+<ul>
+<li>Product marketplace with search and category filter</li>
+<li>Vendor product posting and management</li>
+<li>Cart and checkout system</li>
+<li>Order tracking for students and teachers</li>
+<li>Vendor order approval system</li>
+<li>Notifications and chat system</li>
+</ul>
+<h3>👨‍💻 Developers</h3>
+<p>This system was developed as a student project to demonstrate a complete marketplace workflow using web technologies.</p>
+</div>
+</div> 
+
+<!-- HELP -->
+<div id="help" class="help page">
+<div class="sos">
+<h2>Help & Support</h2>
+<p>If you're experiencing issues, check the solutions below:</p>
+<h3>🔑 Account Issues</h3>
+<p>Make sure your username, password, and selected role are correct.</p>
+<h3>🛍️ Ordering Problems</h3>
+<ul>
+<li>Ensure the product is approved by the vendor</li>
+<li>Check if the item has available stock</li>
+<li>Try refreshing the page</li>
+</ul>
+<h3>📦 Vendor Issues</h3>
+<ul>
+<li>Confirm your product after adding it</li>
+<li>Check the Approved list</li>
+<li>Make sure all fields are filled correctly</li>
+</ul>
+<h3>🔔 Notifications</h3>
+<p>Click the bell icon to see updates about your orders.</p>
+<h3>💬 Chat Support</h3>
+<p>Use the chat feature to communicate with other users.</p>
+<h3>📧 Contact</h3>
+<p>For more help, contact your system administrator.</p>
+</div>
+</div>
+</div>
+
+
+<script>
+let state={mode:"login",user:null};
+
+// Initialize default data if not present
+if(!localStorage.getItem("users")){
+    localStorage.setItem("users", JSON.stringify([
+        {u:"admin", p:"123", r:"vendor"},
+        {u:"student1", p:"123", r:"student"}
+    ]));
+}
+if(!localStorage.getItem("products")){
+    localStorage.setItem("products", JSON.stringify([]));
+}
+if(!localStorage.getItem("orders")){
+    localStorage.setItem("orders", JSON.stringify([]));
+}
+if(!localStorage.getItem("notifications")){
+    localStorage.setItem("notifications", JSON.stringify([]));
+}
+if(!localStorage.getItem("chat")){
+    localStorage.setItem("chat", JSON.stringify([]));
+}
+
+/* AUTH */
+function toggleMode(){
+state.mode=state.mode==="login"?"register":"login";
+modeTitle.innerText=state.mode;
+}
+
+function authSubmit(){
+let users=JSON.parse(localStorage.getItem("users"))||[];
+
+if(state.mode==="register"){
+users.push({u:user.value,p:pass.value,r:role.value});
+localStorage.setItem("users",JSON.stringify(users));
+alert("Registered");return;
+}
+
+let f=users.find(x=>x.u===user.value&&x.p===pass.value&&x.r===role.value);
+if(!f)return alert("Invalid");
+
+state.user=f;
+const authEl = document.getElementById("auth");
+const appEl = document.getElementById("app");
+const userInfoEl = document.getElementById("userInfo");
+const vendorBtnEl = document.getElementById("vendorBtn");
+const ordersBtnEl = document.getElementById("ordersBtn");
+const myOrdersBtnEl = document.getElementById("myOrdersBtn");
+
+authEl.style.display="none";
+appEl.style.display="block";
+userInfoEl.innerText=f.u+" ("+f.r+")";
+
+vendorBtnEl.style.display=f.r==="vendor"?"inline-block":"none";
+ordersBtnEl.style.display=f.r==="vendor"?"inline-block":"none";
+myOrdersBtnEl.style.display=f.r!=="vendor"?"inline-block":"none";
+const cartBtn = Array.from(document.querySelectorAll('nav button')).find(b => b.textContent === 'Cart');
+if(cartBtn) cartBtn.style.display = f.r==="vendor" ? "none" : "inline-block";
+
+loadAll();
+}
+
+/* NAV */
+function go(p){
+    document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+    document.getElementById(p).classList.add("active");
+    if(p === 'mapPage') renderMapPage();
+}
+
+function renderMapPage(){
+    const mapContainerEl = document.getElementById("mapContainer");
+    mapContainerEl.innerHTML = `<p>Select a building above to see its location and map.</p>`;
+}
+
+/* LOGOUT */
+function logout(){
+state.user=null;
+const authEl = document.getElementById("auth");
+const appEl = document.getElementById("app");
+authEl.style.display="flex";
+appEl.style.display="none";
+}
+
+/* IMAGE */
+function readImg(file){
+return new Promise(r=>{
+if(!file){r("");return;}
+let fr=new FileReader();
+fr.onload=e=>r(e.target.result);
+fr.readAsDataURL(file);
+});
+}
+
+/* PRODUCT */
+async function addProduct(){
+const pnameInput = document.getElementById("pname");
+const ppriceInput = document.getElementById("pprice");
+const pstockInput = document.getElementById("pstock");
+const pcatInput = document.getElementById("pcat");
+const plocationInput = document.getElementById("plocation");
+const pimgInput = document.getElementById("pimg");
+
+if(!state.user || state.user.r !== "vendor"){
+    alert("Please login as a vendor before adding a product.");
+    return;
+}
+let p=JSON.parse(localStorage.getItem("products"))||[];
+let name = pnameInput.value.trim();
+let price = parseFloat(ppriceInput.value);
+let stock = parseInt(pstockInput.value, 10);
+if(!name || isNaN(price) || price <= 0 || isNaN(stock) || stock < 0){
+    alert("Please enter a valid product name, price, and stock.");
+    return;
+}
+let img = "";
+try {
+    img = await readImg(pimgInput.files[0]);
+} catch (err) {
+    console.error("Image load failed:", err);
+    alert("Could not read the selected image. Please try again.");
+    return;
+}
+
+let existingProduct = p.find(x => x.name.toLowerCase() === name.toLowerCase() && x.vendor === state.user.u);
+if(existingProduct){
+    alert("A product with this name already exists for your vendor account.");
+    return;
+}
+
+p.push({
+id:Date.now(),
+name:name,
+price:price,
+stock:stock,
+cat:pcatInput.value,
+img:img,
+vendor:state.user.u,
+location:plocationInput.value,
+status:"Pending"
+});
+localStorage.setItem("products",JSON.stringify(p));
+pnameInput.value="";
+ppriceInput.value="";
+pstockInput.value="";
+pcatInput.value="Food";
+plocationInput.value="CASTECH Building";
+pimgInput.value="";
+loadAll();
+alert("Product added to Pending. Click 'Confirm' to approve and make it visible in the marketplace.");
+}
+function approve(id){
+let p=JSON.parse(localStorage.getItem("products"));
+p.forEach(x=>{if(x.id===id)x.status="Approved"});
+localStorage.setItem("products",JSON.stringify(p));
+loadAll();
+}
+/* MARKET */
+function renderMarket(){
+let p=JSON.parse(localStorage.getItem("products"))||[];
+const searchInput = document.getElementById("search");
+const categorySelect = document.getElementById("category");
+const marketListEl = document.getElementById("marketList");
+
+let s=searchInput.value.toLowerCase();
+let c=categorySelect.value;
+marketListEl.innerHTML="";
+let count=0;
+p.forEach(x=>{
+if(x.status!=="Approved")return;
+if(s && !x.name.toLowerCase().includes(s))return;
+if(c && x.cat!==c)return;
+count++;
+marketListEl.innerHTML+=`
+<div class="product">
+${x.img?`<img src="${x.img}">`:`<img src="https://via.placeholder.com/400x130?text=No+Image">`}
+<b>${x.name}</b><br>
+₱${x.price}<br>
+Location: ${x.location}<br>
+<button onclick="addCart(${x.id})">Add</button>
+</div>`;
+});
+if(count===0){
+    marketListEl.innerHTML=`<div class="card">No approved products found yet.</div>`;
+}
+}
+
+/* VENDOR */
+function renderVendor(){
+let p=JSON.parse(localStorage.getItem("products"))||[];
+const pendingEl = document.getElementById("pending");
+const approvedEl = document.getElementById("approved");
+pendingEl.innerHTML="";
+approvedEl.innerHTML="";
+p.filter(x=>x.vendor===state.user.u).forEach(x=>{
+let html=`
+<div class="product">
+${x.img?`<img src="${x.img}">`:``}
+<b>${x.name}</b><br>
+Category: ${x.cat}<br>
+Price: ₱${x.price}<br>
+Stock: ${x.stock}<br>
+Location: ${x.location}<br>
+Status: ${x.status}<br>
+${x.status==="Pending"?`<button onclick="approve(${x.id})">Confirm</button>`:""}
+<button onclick="deleteProduct(${x.id})">Delete</button>
+</div>`;
+(x.status==="Pending"?pendingEl:approvedEl).innerHTML+=html;
+});
+}
+
+function deleteProduct(id){
+let p=JSON.parse(localStorage.getItem("products"));
+p=p.filter(x=>x.id!==id);
+localStorage.setItem("products",JSON.stringify(p));
+loadAll();
+}
+
+/* CART */
+function addCart(id){
+let c=JSON.parse(localStorage.getItem("cart"))||[];
+c.push(id);
+localStorage.setItem("cart",JSON.stringify(c));
+renderCart();
+}
+
+function renderCart(){
+let c=JSON.parse(localStorage.getItem("cart"))||[];
+let p=JSON.parse(localStorage.getItem("products"))||[];
+const cartListEl = document.getElementById("cartList");
+cartListEl.innerHTML="";
+c.forEach(id=>{
+let item=p.find(x=>x.id===id);
+if(item)cartListEl.innerHTML+=item.name+"<br>";
+});
+}
+
+/* CHECKOUT → ORDERS */
+function checkout(){
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
+let products=JSON.parse(localStorage.getItem("products"))||[];
+let orders=JSON.parse(localStorage.getItem("orders"))||[];
+
+
+cart.forEach(id=>{
+let item=products.find(p=>p.id===id);
+if(item && item.stock>0){
+item.stock--;
+let orderId = Date.now()+Math.random();
+orders.push({
+id:orderId,
+productName:item.name,
+productId:item.id,
+buyer:state.user.u,
+vendor:item.vendor,
+status:"Pending",
+location:item.location,
+price:item.price
+});
+showMap(item.location);
+}
+});
+
+localStorage.setItem("products",JSON.stringify(products));
+localStorage.setItem("orders",JSON.stringify(orders));
+localStorage.setItem("cart","[]");
+loadAll();
+}
+
+/* VENDOR ORDERS */
+function renderOrders(){
+let orders=JSON.parse(localStorage.getItem("orders"))||[];
+const orderListEl = document.getElementById("orderList");
+orderListEl.innerHTML="";
+let vendorOrders = orders.filter(o=>o.vendor===state.user.u);
+if(vendorOrders.length===0){
+  orderListEl.innerHTML=`<div class="card">No orders yet.</div>`;
+  return;
+}
+vendorOrders.forEach(o=>{
+orderListEl.innerHTML+=`
+<div class="product">
+Product: ${o.productName}<br>
+Buyer: ${o.buyer}<br>
+Price: ₱${o.price}<br>
+Location: ${o.location}<br>
+Status: ${o.status}<br>
+${o.status==="Pending"?`
+<button onclick="updateOrder('${o.id}','Accepted')">Accept</button>
+<button onclick="updateOrder('${o.id}','Rejected')">Reject</button>`:""}
+</div>`;
+});
+}
+
+/* UPDATE ORDER + NOTIF */
+function updateOrder(id,status){
+let orders=JSON.parse(localStorage.getItem("orders"))||[];
+let notif=JSON.parse(localStorage.getItem("notifications"))||[];
+
+orders.forEach(o=>{
+if(o.id==id){
+o.status=status;
+notif.push({
+user:o.buyer,
+text:`Your order "${o.productName}" was ${status}`
+});
+}
+});
+
+localStorage.setItem("orders",JSON.stringify(orders));
+localStorage.setItem("notifications",JSON.stringify(notif));
+loadAll();
+}
+
+/* STUDENT ORDERS */
+function renderMyOrders(){
+let orders=JSON.parse(localStorage.getItem("orders"))||[];
+const myOrderListEl = document.getElementById("myOrderList");
+myOrderListEl.innerHTML="";
+orders.filter(o=>o.buyer===state.user.u).forEach(o=>{
+myOrderListEl.innerHTML+=`
+<div class="product">
+${o.productName}<br>
+Status:${o.status}
+</div>`;
+});
+}
+
+/* NOTIFICATIONS */
+function showNotif(){
+let n=JSON.parse(localStorage.getItem("notifications"))||[];
+let userN=n.filter(x=>x.user===state.user.u);
+alert(userN.map(x=>x.text).join("\n")||"No notifications");
+}
+
+function updateNotifCount(){
+let n=JSON.parse(localStorage.getItem("notifications"))||[];
+let count=n.filter(x=>x.user===state.user.u).length;
+const notifCountEl = document.getElementById("notifCount");
+notifCountEl.innerText=count||"";
+}
+
+/* CHAT */
+function sendMsg(){
+let m=JSON.parse(localStorage.getItem("chat"))||[];
+const msgInput = document.getElementById("msg");
+const chatBoxEl = document.getElementById("chatBox");
+m.push({u:state.user.u,t:msgInput.value});
+localStorage.setItem("chat",JSON.stringify(m));
+msgInput.value="";
+renderChat();
+}
+
+function renderChat(){
+let m=JSON.parse(localStorage.getItem("chat"))||[];
+const chatBoxEl = document.getElementById("chatBox");
+chatBoxEl.innerHTML="";
+m.forEach(x=>{
+chatBoxEl.innerHTML+=`<div class="msg">${x.u}: ${x.t}</div>`;
+});
+}
+function showMap(location){
+
+go('mapPage');
+
+let map="";
+
+if(location==="CASTECH Building"){
+map=`
+<iframe
+src="https://www.google.com/maps?q=Pampanga+State+Agricultural+University+CASTECH+Building&output=embed"
+width="100%"
+height="450"
+style="border:0;border-radius:12px;"
+allowfullscreen=""
+loading="lazy">
+</iframe>`;
+}
+
+if(location==="UFC Building"){
+map=`
+<iframe
+src="https://www.google.com/maps?q=Pampanga+State+Agricultural+University+UFC+Building&output=embed"
+width="100%"
+height="450"
+style="border:0;border-radius:12px;"
+allowfullscreen=""
+loading="lazy">
+</iframe>`;
+}
+const mapContainerEl = document.getElementById("mapContainer");
+mapContainerEl.innerHTML=map;
+}
+
+/* LOAD */
+function loadAll(){
+renderMarket();
+renderVendor();
+renderCart();
+renderOrders();
+renderMyOrders();
+renderChat();
+updateNotifCount();
+}
+</script>
+
+</body>
+</html>
